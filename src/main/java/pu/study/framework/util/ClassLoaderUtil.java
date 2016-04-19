@@ -45,6 +45,10 @@ public class ClassLoaderUtil {
         return clazz;
     }
 
+    public static Class<?> loadClass(String className){
+        return loadClass(className,false);
+    }
+
     public static Set<Class<?>> getClassSet(String className){
         Set<Class<?>> classSet = new HashSet<Class<?>>();
         //Enumeration<>;
