@@ -1,4 +1,4 @@
-package pu.study.framework;
+package pu.study.framework.core;
 
 import pu.study.framework.helper.BeanHelper;
 import pu.study.framework.helper.ClassHelper;
