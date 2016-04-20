@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * Created by project on 2016/4/19.
  */
-public class ControllrtHelper {
+public class ControllerHelper {
     private final static Map<Request,Handler> ACTION_MAP = new HashMap<Request,Handler>();
 
     static{
