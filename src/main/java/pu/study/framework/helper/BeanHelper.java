@@ -1,5 +1,8 @@
 package pu.study.framework.helper;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pu.study.framework.util.JSONUtil;
 import pu.study.framework.util.ReflectionUtil;
 
 import java.util.HashMap;
@@ -11,13 +14,14 @@ import java.util.Set;
  */
 public final class BeanHelper {
     private static final Map<Class<?>,Object> BEAN_MAP = new HashMap<Class<?>,Object>();
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(BeanHelper.class);
     static {
         Set<Class<?>> beanClassSet = ClassHelper.getBeanClassSet();
         for(Class<?> clazz:beanClassSet){
             Object obj = ReflectionUtil.newInstance(clazz);
             BEAN_MAP.put(clazz,obj);
         }
+        LOGGER.debug("初始化类MAP："+JSONUtil.toJson(BEAN_MAP));
     }
 
     /**
@@ -29,7 +33,7 @@ public final class BeanHelper {
     }
 
     public static<T> T getBean(Class<?> clazz){
-        if(BEAN_MAP.containsKey(clazz)){
+        if(!BEAN_MAP.containsKey(clazz)){
             throw new RuntimeException("could not found any class :"+clazz);
         }
         return (T) BEAN_MAP.get(clazz);

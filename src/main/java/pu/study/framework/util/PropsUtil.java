@@ -99,6 +99,31 @@ public final class PropsUtil {
     }
 
     /**
+     * 获取值为long型的数据，默认值自定
+     * @param props
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public static long getLong(Properties props,String key,long defaultValue){
+        long value = defaultValue;
+        if(props.containsKey(key)){
+            value = CastUtil.castLong(props.getProperty(key));
+        }
+        return value;
+    }
+
+    /**
+     * 获取long型数据，默认值0
+     * @param props
+     * @param key
+     * @return
+     */
+    public static  long getLong(Properties props,String key){
+        return getLong(props,key,0);
+    }
+
+    /**
      * 获取boolean类型的数据，给定默认值
      * @param props
      * @param key

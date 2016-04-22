@@ -1,6 +1,7 @@
 package pu.study.framework.helper;
 
-import pu.study.framework.ConfigConstant;
+import pu.study.framework.bean.Param;
+import pu.study.framework.config.ConfigConstant;
 import pu.study.framework.util.PropsUtil;
 
 import java.util.Properties;
@@ -46,6 +47,25 @@ public class ConfigHelper {
      */
     public static String getJdbcPassword(){
         return PropsUtil.getString(CONFIG_PROPS,ConfigConstant.JDBC_PASSWORD);
+    }
+
+    public static int getDbcpMaxTotal(){
+        return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.DBCP_MAXTOTAL);
+    }
+
+    public static int getDbcpMaxIdle(){
+        return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.DBCP_MAXIDLE);
+    }
+    public static int getDbcpMinIdle(){
+        return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.DBCP_MINIDLE);
+    }
+
+    public static int getDbcpInitialSize(){
+        return PropsUtil.getInt(CONFIG_PROPS,ConfigConstant.DBCP_INITIALSIZE);
+    }
+
+    public static long getMaxWaitMillis(){
+        return PropsUtil.getLong(CONFIG_PROPS,ConfigConstant.DBCP_MAXWAITMILLIS);
     }
 
     /**

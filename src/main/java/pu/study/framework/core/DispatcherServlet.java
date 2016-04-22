@@ -2,6 +2,8 @@ package pu.study.framework.core;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pu.study.framework.bean.Data;
 import pu.study.framework.bean.Handler;
 import pu.study.framework.bean.Param;
@@ -31,8 +33,12 @@ import java.util.Map;
  */
 @WebServlet(urlPatterns = "/*",loadOnStartup = 0)
 public class DispatcherServlet extends HttpServlet{
+    private static final Logger LOGGER = LoggerFactory.getLogger(DispatcherServlet.class);
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
+        System.out.println("：初始化框架");
+        LOGGER.debug("：初始化框架");
+        LOGGER.debug("：注册Helper类");
         //初始化框架自定义的那些类，具体写在HelperLoader中
         HelperLoader.init();
         //获取servlet上下文以注册servlet
@@ -43,16 +49,20 @@ public class DispatcherServlet extends HttpServlet{
         //注册处理静态文件的servlet
         ServletRegistration defaultServlet = servletContext.getServletRegistration("default");
         defaultServlet.addMapping(ConfigHelper.getAppBaseAssetPath()+"*");
+        LOGGER.debug("：初始化框架结束");
     }
 
     @Override
     public void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获得请求方法和路径
         String requestMethod = req.getMethod().toLowerCase();
+        LOGGER.debug("获得到的方法为:"+requestMethod);
         String requestPath = req.getPathInfo();
+        LOGGER.debug("请求路径为："+requestPath);
         //根据请求的方法路径获得Action对象
         Handler handler = ControllerHelper.getHandler(requestMethod,requestPath);
         if(handler!=null){
+            LOGGER.debug("获得handler：",handler);
             //获取Controller类以及bean实例
             Class<?> controllerClass = handler.getControllerClass();
             Object controllerBean = BeanHelper.getBean(controllerClass);

@@ -1,6 +1,8 @@
 package pu.study.framework.helper;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pu.study.framework.annotation.Controller;
 import pu.study.framework.annotation.Service;
 import pu.study.framework.util.ClassLoaderUtil;
@@ -12,10 +14,12 @@ import java.util.Set;
  * Created by project on 2016/4/19.
  */
 public final class ClassHelper {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ClassHelper.class);
     private static final Set<Class<?>> CLASS_SET;
 
     static {
         String basePackage = ConfigHelper.getAppBasePackage();
+        LOGGER.debug("获得基础包路径成功："+basePackage);
         CLASS_SET = ClassLoaderUtil.getClassSet(basePackage);
     }
 
